@@ -199,6 +199,10 @@ func (rs *ReceiptService) Print(order models.Order, discount float64, service_co
 	p.LineFeed()
 
 	p.PrintAndCut()
+	err = p.OpenCashDrawer()
+	if err != nil {
+		rs.Logger.Error("Failed to open cash drawer:", err)
+	}
 
 	return nil
 }
