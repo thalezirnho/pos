@@ -51,7 +51,7 @@
 
                         <Divider />
                         <div class="flex flex-column">
-                            <h3><span class="pi pi-print"></span> {{ t('printer',2) }}</h3>
+                            <h4><span class="pi pi-print"></span> {{ t('printer',2) }}</h4>
                             <span class="mt-2 font-bold">{{$t('client_receipt_printer')}}</span>
                             <div class="flex align-items-center mt-3">
                                     <span>{{t("host",1)}}:</span>
@@ -61,6 +61,10 @@
                             <div class="flex align-items-center mt-3">
                                     <span>{{t("host",1)}}:</span>
                                     <InputText v-model="kitchen_receipt_printer_host"  class="mx-2" />
+                            </div>
+                            <div class="flex align-items-center mt-5 gap-2">
+                                <ToggleSwitch v-model="auto_open_cash_drawer" />
+                                <span>{{ $t('auto_open_cash_drawer') }}</span>
                             </div>
                         </div>
 
@@ -131,7 +135,7 @@ import {getCurrentInstance,ref} from 'vue'
 import Dropdown from 'primevue/dropdown';
 import { useI18n } from 'vue-i18n'
 import { globalStore } from '../stores';
-import {RadioButton,Avatar,Badge, Select} from 'primevue';
+import {RadioButton,Avatar,Badge, Select, ToggleSwitch} from 'primevue';
 import auth from '../services/auth';
 
 const { proxy } = getCurrentInstance();
@@ -146,6 +150,7 @@ const kitchen_receipt_printer_host = ref()
 
 const default_cost_calculation_method = ref("average")
 const shop_mode = ref('')
+const auto_open_cash_drawer = ref(false)
 
 const toast = useToast();
 
@@ -197,6 +202,7 @@ const saveSettings = () => {
                 kitchen_receipt_printer: {
                     host: kitchen_receipt_printer_host.value
                 },
+                auto_open_cash_drawer: auto_open_cash_drawer.value,
                 payment_sources: payment_sources.value == null ? [] : payment_sources.value,
                 shop_mode: shop_mode.value
             }
@@ -233,6 +239,7 @@ const getSettings = () => {
         kitchen_receipt_printer_host.value = response.data.data.kitchen_receipt_printer?.host || ''
         payment_sources.value = response.data.data.payment_sources == null ? [] : response.data.data.payment_sources
         shop_mode.value = response.data.data.shop_mode || ''
+        auto_open_cash_drawer.value = response.data.data.auto_open_cash_drawer
     })
     .catch((err) => {
         console.log(err)

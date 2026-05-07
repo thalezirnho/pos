@@ -188,6 +188,7 @@
     "roles": "Roles",
     "new_password": "New password",
     "profile": "Profile",
-    "current_password": "Current password"
+    "current_password": "Current password",
+    "auto_open_cash_drawer": "Auto open cash drawer"
   }
 }

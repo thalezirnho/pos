@@ -199,9 +199,22 @@ func (rs *ReceiptService) Print(order models.Order, discount float64, service_co
 	p.LineFeed()
 
 	p.PrintAndCut()
+
+	return nil
+}
+
+func (rs *ReceiptService) OpenCashDrawer(printer_host string) error {
+	socket, err := net.Dial("tcp", fmt.Sprintf("%s:9100", printer_host))
+	if err != nil {
+		return err
+	}
+	defer socket.Close()
+
+	p := escpos.New(socket)
 	err = p.OpenCashDrawer()
 	if err != nil {
 		rs.Logger.Error("Failed to open cash drawer:", err)
+		return err
 	}
 
 	return nil

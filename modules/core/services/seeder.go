@@ -73,6 +73,7 @@ func (s *Seeder) SeedSettings() error {
 				Code:     "en",
 				Language: "English",
 			},
+			AutoOpenCashDrawer: true,
 			ClientReceiptPrinter: models.PrinterSettings{
 				Host: "192.168.123.123",
 			},

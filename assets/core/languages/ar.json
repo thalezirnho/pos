@@ -187,6 +187,7 @@
     "username": "اسم المستخدم",
     "roles": "الأدوار",
     "profile": "الملف الشخصي",
-    "current_password": "كلمة المرور الحالية"
+    "current_password": "كلمة المرور الحالية",
+    "auto_open_cash_drawer": "فتح درج النقود تلقائياً"
   }
 }
