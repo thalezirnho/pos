@@ -330,6 +330,10 @@ const loadLanguage = async () => {
     })
     .catch((err) => {
         console.log(err)
+        if (err.response?.status === 401) {
+            proxy.$auth.signOut()
+            window.location.href = '/'
+        }
     });
 
 }

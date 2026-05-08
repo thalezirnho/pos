@@ -243,6 +243,10 @@ const getSettings = () => {
     })
     .catch((err) => {
         console.log(err)
+        if (err.response?.status === 401) {
+            auth.signOut()
+            window.location.href = '/'
+        }
     });
 }
 
