@@ -605,7 +605,7 @@ const increaseOrderItemQty = (index:number) => {
 
 
     const product = products.value.find(p => p.id == orderItems.value[index].product.id)
-    if (product && product.availability < ( currentQuantity + 1)) {
+    if (product && product.enable_inventory_consumption && product.availability < ( currentQuantity + 1)) {
         toast.add({severity:'warn', summary: 'Insufficient availability', detail: `${orderItems.value[index].product.name} has only ${product?.availability} left`,group: 'br'})
         return
     }
@@ -1133,7 +1133,7 @@ const addItem = async (item) => {
 
 
     const product = products.value.find(p => p.id == item.id)
-    if (product && product.availability < ( currentQuantity + 1)) {
+    if (product && product.enable_inventory_consumption && product.availability < ( currentQuantity + 1)) {
         toast.add({severity:'warn', summary: 'Insufficient availability', detail: `${item.name} has only ${product?.availability} left`,group: 'br'})
         return
     }
